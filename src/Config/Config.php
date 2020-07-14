@@ -2,28 +2,36 @@
 
 namespace KofiCypher\PayStack\Config;
 
+use KofiCypher\Contracts\ConfigContract as ConfigInterface;
+
 use Dotenv\Dotenv;
 
-class Config {
+class Config implements ConfigInterface {
+   private $keys = [];
 
-    protected $dotenv;
 
-    public function __construct()
+    public function __construct(string $seckey = null)
     {
-        $this->dotenv = Dotenv::createImmutable(__DIR__.'/../../'); 
-        $this->dotenv->load();
+      // if($seckey = null){
+      //   $dotenv = Dotenv::createImmutable(__DIR__.'/../../'); 
+      //   $dotenv->load();
 
-        $this->dotenv->required('PAYSTACK_SECRET_KEY')->notEmpty();
+      //   $dotenv->required('PAYSTACK_SECRET_KEY')->notEmpty();
+      // } else {
+
+      // }
+
+      
     }
 
 
-    protected function getAllVars(): array
+    protected function getconfig(): array
     {
       return [
         'secret_key' => $_SERVER['PAYSTACK_SECRET_KEY'], 
         'public_key' => $_SERVER['PAYSTACK_PUBLIC_KEY'], 
         'base_url' => $_SERVER['PAYSTACK_BASE_URL'], 
-        'env_flag' => (bool) $_SERVER['PAYSTACK_ENV_FLAG']
+        'env_flag' => $_SERVER['PAYSTACK_ENV_FLAG']
       ];
     }
 

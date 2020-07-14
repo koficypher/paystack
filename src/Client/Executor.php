@@ -3,10 +3,10 @@
 namespace KofiCypher\Paystack\Client;
 
 use KofiCypher\PayStack\Config\Config;
-use KofiCypher\PayStack\Contracts\RequestInterface as Request;
+use KofiCypher\PayStack\Contracts\ClientContract as Request;
 use GuzzleHttp\Client;
 
- class Executor extends Config  {
+ class Executor extends Config implements Request  {
 
     private  $client;
 
@@ -33,10 +33,9 @@ use GuzzleHttp\Client;
                                 'Authorization' => 'Bearer '. $this->sec_key,
                             ],
                             'http_errors' => false,
-                            'verify' => false
+                            'verify' => $this->env_flag == 'true' ? true : false
                             ]
                         );
-    //  var_dump($this->client);
     }
 
     public function getRequest(string $url, array $params = null)
@@ -64,7 +63,7 @@ use GuzzleHttp\Client;
           }
    
          if($response->getStatusCode() == 200){
-            return json_decode($response->getBody()->getContents());
+            return $response->getBody()->getContents();
          }
 
     }
