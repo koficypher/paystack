@@ -4,49 +4,38 @@ namespace KofiCypher\Paystack\Client;
 
 use KofiCypher\PayStack\Config\Config;
 use KofiCypher\PayStack\Contracts\ClientContract as Request;
+use KofiCypher\PayStack\Misc\Response;
 use GuzzleHttp\Client;
 
- class Executor extends Config implements Request  {
+ abstract class Executor implements Request  {
 
-    private  $client;
 
-    protected $env_keys = [];
-
-    protected $sec_key;
-
-    protected $env_flag;
-
-    protected $base_url;
-
-    public function __construct() 
+    private function makeClient()
     {
-      $this->env_keys = (new Config())->getAllVars();
-      $this->sec_key = $this->env_keys['secret_key'];
-      $this->base_url = $this->env_keys['base_url'];
-      $this->env_flag =  $this->env_keys['env_flag'];
+      $config = Config::get_config();
 
-      $this->client = new Client(
-                           [
-                            'base_uri' => $this->base_url,
-                            'headers' => [
-                                'Content-Type' => 'application/json',
-                                'Authorization' => 'Bearer '. $this->sec_key,
-                            ],
-                            'http_errors' => false,
-                            'verify' => $this->env_flag == 'true' ? true : false
-                            ]
-                        );
+      return new Client([
+            'base_uri' => $config['base_url'],
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer '. $config['secret_key'],
+            ],
+            'http_errors' => false,
+            'verify' => $config['env_flag'] == true ? true : false  // $this->env_flag == 'true' ? true : false
+      ]);
+
     }
 
-    public function getRequest(string $url, array $params = null)
+    public function getRequest(string $url, array $params = null): string
     {
+       $client = $this->makeClient();
        if(!is_null($params)) {
 
-         $response = $this->client->request('GET', $url, ['query' => $params]);
+         $response = $client->request('GET', $url, ['query' => $params]);
          
        } else {
 
-        $response =  $this->client->request('GET', $url);
+        $response =  $client->request('GET', $url);
 
        }
 
@@ -54,12 +43,13 @@ use GuzzleHttp\Client;
     }
 
 
-    public function postRequest(string $url, array $data, array $param = null)
+    public function postRequest(string $url, array $data, array $param = null): string
     {
+        $client = $this->makeClient();
         if(!is_null($param)) {
-            $response = $this->client->request('POST', $url, ['query' => $params], ['json' => $data]);
+            $response = $client->request('POST', $url, ['query' => $params], ['json' => $data]);
           } else {
-           $response =  $this->client->request('POST', $url, ['json' => $data]);
+           $response =  $client->request('POST', $url, ['json' => $data]);
           }
    
          if($response->getStatusCode() == 200){

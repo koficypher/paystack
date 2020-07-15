@@ -1,18 +1,19 @@
 <?php
+namespace KofiCypher\PayStack\Misc;
 
-class ResponseContract {
+class Response {
 
-    public boolean $status;
+    public bool $status;
 
     public string $message;
 
-    public mixed $data;
+    public array $data;
 
     public function __construct(string $response_data) 
     {
         $payload = json_decode($response_data, true);
 
-        $this->status = (bool) $payload['status'];
+        $this->status = $payload['status'];
         $this->message = $payload['message'];
         $this->data = $payload['data'];
       
