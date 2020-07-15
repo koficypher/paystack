@@ -4,7 +4,7 @@ namespace KofiCypher\PayStack\Config;
 
 use Dotenv\Dotenv;
 
-class Config {
+abstract class Config {
 
     protected $dotenv;
 
