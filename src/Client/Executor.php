@@ -10,9 +10,9 @@ use GuzzleHttp\Client;
  abstract class Executor implements Request  {
 
 
-    private function makeClient()
+    private function makeClient(string $seckey = null)
     {
-      $config = Config::get_config();
+      $config = Config::get_config($seckey);
 
       return new Client([
             'base_uri' => $config['base_url'],
@@ -26,9 +26,9 @@ use GuzzleHttp\Client;
 
     }
 
-    public function getRequest(string $url, array $params = null): string
+    public function getRequest(string $url, array $params = null, string $seckey = null)
     {
-       $client = $this->makeClient();
+       $client = $this->makeClient($seckey);
        if(!is_null($params)) {
 
          $response = $client->request('GET', $url, ['query' => $params]);
@@ -39,13 +39,17 @@ use GuzzleHttp\Client;
 
        }
 
-        return $response->getBody();
+       if($response->getStatusCode() == 200){
+           return $response->getBody()->getContents();
+        } else {
+           return $response->getBody()->getContents();
+        }
     }
 
 
-    public function postRequest(string $url, array $data, array $param = null): string
+    public function postRequest(string $url, array $data, array $param = null, string $seckey = null)
     {
-        $client = $this->makeClient();
+        $client = $this->makeClient($seckey);
         if(!is_null($param)) {
             $response = $client->request('POST', $url, ['query' => $params], ['json' => $data]);
           } else {
@@ -54,6 +58,8 @@ use GuzzleHttp\Client;
    
          if($response->getStatusCode() == 200){
             return $response->getBody()->getContents();
+         } else {
+           return $response->getBody()->getContents();
          }
 
     }

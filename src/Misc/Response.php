@@ -3,11 +3,11 @@ namespace KofiCypher\PayStack\Misc;
 
 class Response {
 
-    public  $status;
+    public bool $status;
 
-    public  $message;
+    public string  $message;
 
-    public  $data;
+    public array  $data = [];
 
     public function __construct(string $response_data) 
     {
@@ -15,7 +15,7 @@ class Response {
 
         $this->status = $payload['status'];
         $this->message = $payload['message'];
-        $this->data = $payload['data'];
+        $this->data = isset($payload['data']) ? $payload['data']:[];
       
     }
 

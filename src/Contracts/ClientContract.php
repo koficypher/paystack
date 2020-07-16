@@ -9,9 +9,9 @@ interface ClientContract {
      *
      * @param string $url
      * @param array $params
-     * @return string $paylaod
+     * @return mixed $paylaod
      */
-    public function getRequest(string $url, array $params = null): string;
+    public function getRequest(string $url, array $params = null, string $seckey = null);
 
     /**
      * Performs a post request with  the supllied arguments
@@ -19,7 +19,8 @@ interface ClientContract {
      * @param string $url
      * @param array $data
      * @param array $params
-     * @return string $payload
+     * @param string $seckey
+     * @return mixed $payload
      */
-    public function postRequest(string $url,array $data, array $params=null): string;
+    public function postRequest(string $url,array $data, array $params=null, string $seckey = null);
 }
