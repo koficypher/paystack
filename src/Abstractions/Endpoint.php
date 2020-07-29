@@ -12,5 +12,6 @@ class Endpoint {
     const TransTotals = '/transaction/totals';
     const ExportTrans = '/transaction/export';
     const PartialDebit = '/transaction/partial_debit';
+    const Split = '/split';
     
 }

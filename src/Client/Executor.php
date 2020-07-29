@@ -65,4 +65,21 @@ use GuzzleHttp\Client;
     }
 
 
+    public function putRequest(string $url, array $data, array $param = null, string $seckey = null)
+    {
+      $client = $this->makeClient($seckey);
+      if(!is_null($param)) {
+          $response = $client->request('PUT', $url, ['query' => $params], ['json' => $data]);
+        } else {
+         $response =  $client->request('PUT', $url, ['json' => $data]);
+        }
+ 
+       if($response->getStatusCode() == 200){
+          return $response->getBody()->getContents();
+       } else {
+         return $response->getBody()->getContents();
+       }
+    }
+
+
 }

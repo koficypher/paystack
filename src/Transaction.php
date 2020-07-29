@@ -25,7 +25,7 @@ class Transaction extends Executor {
         return new Response($response);
     }
 
-    public function verify($reference)
+    public function verify(string $reference)
     {
         $response = $this->getRequest(Endpoint::VerifyUrl.'/'.$reference);
 
@@ -39,7 +39,7 @@ class Transaction extends Executor {
         return new Response($response);
     }
 
-    public function fetch($id)
+    public function fetch(string $id)
     {
         $response = $this->getRequest(Endpoint::ListUrl.'/'.$id);
 
