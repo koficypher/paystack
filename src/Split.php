@@ -71,7 +71,7 @@ class Split extends Executor {
     /**
      * Update or add a subaccount to a split created on an integration account
      *
-     * @param string $id - id of the split 
+     * @param string $id - id of the split to update
      * @param array $data - data body fields according to the api docs
      * @param string $seckey - secret key of the account
      * @return object - the response object
@@ -81,5 +81,20 @@ class Split extends Executor {
         $response = $this->postRequest(Endpoint::Split.'/'.$id.'/subaccount/add', $data, null, $seckey);
 
         return new Response($response);
+    }
+
+    /**
+     * Removes a split from a subaccount
+     *
+     * @param string $id - split id to delete
+     * @param array $data -data body fields according to the api docs
+     * @param string $seckey - account secret key
+     * @return object - the response object
+     */
+    public function removeSplitFromSubAccount(string $id, array $data, string $seckey = null)
+    {
+       $response = $this->postRequest(Endpoint::Split.'/'.$id.'/subaccount/remove', $data, null, $seckey );
+
+       return new Response($response);
     }
 }
