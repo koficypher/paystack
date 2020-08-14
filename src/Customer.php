@@ -33,5 +33,32 @@ class Customer extends Executor {
     {
       return new Response($this->getRequest(Endpoint::Customer, null, $params, $seckey));
     }
+
+    /**
+     * Fetchs and returns a customer on an integration
+     *
+     * @param string $email_or_code - email or code of the customer
+     * @param string $seckey - account secret key
+     * @return object - the response object
+     */
+    public function fetchCustomer(string $email_or_code, string $seckey = null)
+    {
+      return new Response($this->getRequest(Endpoint::Customer.'/'.$email_or_code, null, null, $seckey));
+    }
+
+    /**
+     * Updates a customer's record or details on an integration
+     *
+     * @param string $code - customer code
+     * @param array $data - data body fields according to the documentation
+     * @param string $seckey - account secret key
+     * @return object - the response object
+     */
+    public function updateCustomer(string $code, array $data, string $seckey = null)
+    {
+      return new Response($this->postRequest(Endpoint::Customer.'/'.$code, $data, null, $seckey));
+    }
+
+
     
 }
