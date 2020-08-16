@@ -56,7 +56,32 @@ class Customer extends Executor {
      */
     public function updateCustomer(string $code, array $data, string $seckey = null)
     {
-      return new Response($this->postRequest(Endpoint::Customer.'/'.$code, $data, null, $seckey));
+      return new Response($this->putRequest(Endpoint::Customer.'/'.$code, $data, null, $seckey));
+    }
+
+    /**
+     * Blacklist or whitelist a customer on an integration
+     *
+     * @param string $email_or_code - customer's email or code
+     * @param string $risk_action - risk action - default,allow and deny
+     * @param string $seckey - account's secret key
+     * @return object - the response object
+     */
+    public function whitelistOrBlacklistCustomer(string $email_or_code, string $risk_action, string $seckey = null)
+    {
+      return new Response($this->postRequest(Endpoint::Customer.'/set_risk_action', ['customer'=> $email_or_code, 'risk_action' => $risk_action], null, $seckey));
+    }
+
+    /**
+     * Deactivate authorization when a customer's card needs to be
+     *
+     * @param string $auth_code - customer's auth_code generate on a card
+     * @param string $seckey - account secret key
+     * @return object - the response object
+     */
+    public function deactivateAuthCode(string $auth_code, string $seckey)
+    {
+      return new Response($this->postRequest(Endpoint::Customer.'/deactivate_authorization', ['authorization_code' => $auth_code], null, $seckey));
     }
 
 

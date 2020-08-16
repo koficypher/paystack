@@ -14,5 +14,6 @@ class Endpoint {
     const PartialDebit = '/transaction/partial_debit';
     const Split = '/split';
     const Customer = '/customer';
+    const Subaccount = '/subaccount';
     
 }
