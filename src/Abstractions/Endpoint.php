@@ -15,5 +15,6 @@ class Endpoint {
     const Split = '/split';
     const Customer = '/customer';
     const Subaccount = '/subaccount';
+    const Plan = '/plan';
     
 }
