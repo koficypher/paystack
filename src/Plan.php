@@ -16,7 +16,7 @@ class Plan extends Executor {
      * @param string $seckey - account secret key
      * @return object - the response object
      */
-    public function createPlan(array $data, string $seckey = null)
+    public function createPlan(array $data, string $seckey = null): Response
     {
         return new Response($this->postRequest(Endpoint::Plan, $data, null, $seckey));
     }

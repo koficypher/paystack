@@ -16,7 +16,7 @@ class Customer extends Executor {
      * @param string $seckey - Paystack secret key
      * @return object - the response object
      */
-    public function createCustomer(array $data, string $seckey = null)
+    public function createCustomer(array $data, string $seckey = null): Response
     {
       return new Response($this->postRequest(Endpoint::Customer, $data, null, $seckey));
     }
@@ -29,7 +29,7 @@ class Customer extends Executor {
      * @param string $seckey - 
      * @return object - the response object
      */
-    public function listCustomers(array $params = null, string $seckey = null)
+    public function listCustomers(array $params = null, string $seckey = null): Response
     {
       return new Response($this->getRequest(Endpoint::Customer, null, $params, $seckey));
     }
@@ -41,7 +41,7 @@ class Customer extends Executor {
      * @param string $seckey - account secret key
      * @return object - the response object
      */
-    public function fetchCustomer(string $email_or_code, string $seckey = null)
+    public function fetchCustomer(string $email_or_code, string $seckey = null): Response
     {
       return new Response($this->getRequest(Endpoint::Customer.'/'.$email_or_code, null, null, $seckey));
     }
@@ -54,7 +54,7 @@ class Customer extends Executor {
      * @param string $seckey - account secret key
      * @return object - the response object
      */
-    public function updateCustomer(string $code, array $data, string $seckey = null)
+    public function updateCustomer(string $code, array $data, string $seckey = null): Response
     {
       return new Response($this->putRequest(Endpoint::Customer.'/'.$code, $data, null, $seckey));
     }
@@ -67,7 +67,7 @@ class Customer extends Executor {
      * @param string $seckey - account's secret key
      * @return object - the response object
      */
-    public function whitelistOrBlacklistCustomer(string $email_or_code, string $risk_action, string $seckey = null)
+    public function whitelistOrBlacklistCustomer(string $email_or_code, string $risk_action, string $seckey = null): Response
     {
       return new Response($this->postRequest(Endpoint::Customer.'/set_risk_action', ['customer'=> $email_or_code, 'risk_action' => $risk_action], null, $seckey));
     }
@@ -79,7 +79,7 @@ class Customer extends Executor {
      * @param string $seckey - account secret key
      * @return object - the response object
      */
-    public function deactivateAuthCode(string $auth_code, string $seckey)
+    public function deactivateAuthCode(string $auth_code, string $seckey): Response
     {
       return new Response($this->postRequest(Endpoint::Customer.'/deactivate_authorization', ['authorization_code' => $auth_code], null, $seckey));
     }
