@@ -15,7 +15,7 @@ class Subaccount extends Executor {
      * @param string $seckey - account secret key
      * @return object - response object
      */
-    public function createAccount(array $data, string $seckey = null)
+    public function createSubaccount(array $data, string $seckey = null)
     {
       return new Response($this->postRequest(Endpoint::Subaccount, $data, null, $seckey));
     }

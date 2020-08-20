@@ -17,4 +17,5 @@ class Endpoint {
     const Subaccount = '/subaccount';
     const Plan = '/plan';
     const Subscription = '/subscription';
+    const Product = '/product';
 }
