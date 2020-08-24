@@ -18,4 +18,5 @@ class Endpoint {
     const Plan = '/plan';
     const Subscription = '/subscription';
     const Product = '/product';
+    const Page = '/page';
 }
