@@ -2,7 +2,7 @@
 
 namespace KofiCypher\PaStack;
 
-use KofiCypher\Paystack\Client\Executor;
+use KofiCypher\PayStack\Client\Executor;
 use KofiCypher\PayStack\Misc\Response;
 use KofiCypher\PayStack\Abstractions\Endpoint;
 

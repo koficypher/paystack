@@ -19,4 +19,5 @@ class Endpoint {
     const Subscription = '/subscription';
     const Product = '/product';
     const Page = '/page';
+    const PageAvailable = '/page/check_slug_availability';
 }

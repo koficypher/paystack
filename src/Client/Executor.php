@@ -1,6 +1,6 @@
 <?php
 
-namespace KofiCypher\Paystack\Client;
+namespace KofiCypher\PayStack\Client;
 
 use KofiCypher\PayStack\Config\Config;
 use KofiCypher\PayStack\Contracts\ClientContract as Request;
