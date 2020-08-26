@@ -20,4 +20,5 @@ class Endpoint {
     const Product = '/product';
     const Page = '/page';
     const PageAvailable = '/page/check_slug_availability';
+    const Invoice = '/paymentrequest';
 }
