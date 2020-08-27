@@ -21,4 +21,8 @@ class Endpoint {
     const Page = '/page';
     const PageAvailable = '/page/check_slug_availability';
     const Invoice = '/paymentrequest';
+    const verifyInvoice = '/paymentrequest/verify';
+    const notifyInvoice = '/paymentrequest/notify';
+    const finalizeInvoice = '/paymentrequest/finalize';
+    const archiveInvoice = '/paymentrequest/archive';
 }
