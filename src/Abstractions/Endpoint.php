@@ -25,4 +25,5 @@ class Endpoint {
     const notifyInvoice = '/paymentrequest/notify';
     const finalizeInvoice = '/paymentrequest/finalize';
     const archiveInvoice = '/paymentrequest/archive';
+    const Settlement = '/settlement';
 }
